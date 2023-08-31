@@ -138,7 +138,7 @@ Tree Induction - challenges
 		- nodes with homogeneous class distribution is preferred
 		- need a measure of node impurity
 			| entropy - shows randomness of data
-			| gini index - shows purity of data
+			| gini index - shows purity of data 
 			| information gain - shows how much information is gained by splitting data
 3 determine when to stop splitting
 	: when a node is 100% in one class
@@ -150,12 +150,12 @@ Tree Induction - challenges
 Pros 
 	: inexpensive
 	: extremely fast
-	: easy to itnerpet
+	: easy to interpret
 	: accuracy comparable to other methods
 
 Cons
-	: can create over compelx trees that do not generalize data well (overfitting)
-	: highly snesitive to small changes of the data: high variance
+	: can create overly complex trees that do not generalize data well (overfitting)
+	: highly sensitive to small changes of the data: high variance
 		- small changes in data can result in large changes in tree
 		- can be reduced by ensemble methods
-
+------------------------
