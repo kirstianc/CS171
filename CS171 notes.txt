@@ -159,3 +159,106 @@ Cons
 		- small changes in data can result in large changes in tree
 		- can be reduced by ensemble methods
 ------------------------
+Review - Decision Trees
+- how to determine attribute test condition?
+	: attribute types, number of ways to split
+- how to determine the best split?
+	: homogeneous class distribution, measure of node impurity (entropy, gini index, information gain)
+
+Bias - error between avg model prediction/truth (how well the model fits the data)
+
+Variance - avg variability in model prediction for the dataset (how much the model changes based on the input data)
+
+Bias-Variance Tradeoff
+	: high bias, low variance
+		- underfitting (overly simplified model)
+		- high error on both test and train data
+	: low bias, high variance
+		- overfitting (overly complex model)
+		- low error on train data, high error on test data
+	: low bias, low variance
+		- good fit
+	: high bias, high variance
+		- bad fit
+
+Training and Test Errors
+- training data: used to train the model
+- test data: used to test the model
+- test error is more important than training error (because we want to know how well the model generalizes to unseen data)
+	: we care abt generalization
+	: i.e. training data w no errors seems good but the test data might have a lot of errors bc the model is
+		 perfect for the training but not for generalized data sets
+- Generalization Errors
+	: Re-substition errors: error on training (e(t))
+	: Generalization errors: error on test (e'(t))
+- Methods for estimating Generalization Errors
+	: Optimistic approach (e'(t))
+		- use training error as an estimate of generalization error
+		- e'(t) = e(t)
+		- problem: training error is usually optimistic
+	: Pessimistic approach (e'(t))
+		- use training error + complexity penalty as an estimate of generalization error
+		- e'(t) = e(t) + complexity penalty
+		- problem: complexity penalty is usually pessimistic
+		e.g. given penality is 0.5
+			Training error 10/1000 = 1%
+			Generalization error (10 + 30 x 0.5)/1000 = 2.5%
+		Optimistic approach (just training error) is too optimistic
+		Pessimistic approach (Generalization error) is more realistic
+	: Reduced error pruning (REP)
+		- split training data into 2 components
+			| training set - used to train the model
+			| validation set - used to estimate generalization error
+
+Overfitting
+- model fits the training data too well
+	: model is too complex
+	: model is too sensitive to small variations in training data
+	: model does not generalize well to test data
+- pre-pruning
+	: stop growing the tree when some stopping criteria is met
+	: e.g. stop growing the tree when the number of examples in a node is below a threshold
+- post-pruning
+	: grow the tree to completion, then prune the tree
+	: e.g. if removing a sub-tree improves generalization error (reduces), then replace sub-tree with leaf node
+		- the class label of that leaf node is the majority class of the sub-tree
+
+Model Evaluation in Classification
+- metrics for Performance Evaluation
+	: predictive capability - how well does the model predict the class label of unseen data?
+		- confusion matrix
+			| TP - true positive 
+			| TN - true negative 
+			| FP - false positive (model predicts positive but is actually negative)
+			| FN - false negative (model predicts negative but is actually positive)
+	: accuracy
+		- fraction of correct predictions
+		- accuracy = (TP + TN)/(TP + TN + FP + FN) == (true predictions)/(total predictions)
+		- can be misleading, e.g. if 99% of data is class A, then a model that always predicts class A will have 99% accuracy
+	: precision
+		- fraction of positive predictions that are correct
+		- precision = TP/(TP + FP) == (true positive predictions)/(total positive predictions)
+	: recall
+		- fraction of positive examples that are correctly predicted
+		- recall = TP/(TP + FN) == (true positive predictions)/(total positive examples)
+	: F1 - measure = 2 * (precision * recall)/(precision + recall)
+	: ROC curve
+		- plots true positive rate (TPR) vs false positive rate (FPR)
+- methods for Performance Evaluation
+	: estimation
+		- holdout method (2/3 data for training, 1/3 data for testing)
+			| split data into training and test sets
+			| train model on training set
+			| evaluate model on test set
+		- random subsampling 
+			| repeated holdout method
+		- cross validation (k-fold cross validation)
+			| split data into training and testing
+			| training is broken into k equal sized subsets
+			| e.g. fold 1 is for validation, fold 2-5 is for training, then fold 2 is for validation, fold 1,3-5 is for training, etc
+				- imagine validation data as a mini-test data inside the training data	
+			| repeat k times, each time using a different subset for testing
+		- bootstrap
+			| randomly sample data with replacement
+			| train model on sampled data
+			| evaluate model on unsampled data
