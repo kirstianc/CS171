@@ -312,6 +312,7 @@ Summary of Ensemble Methods (you can combine based on the problem)
 
 Decision Tree Ensemble Methods
 	: issues with decision trees - (over/under fitting)
+
 	Random Forest
 		- bagging algo on decision trees
 			1. pick N random records from data set (bootstrap)
@@ -367,3 +368,22 @@ Decision Tree Ensemble Methods
 		- AdaBoost is slower bc needing multiple iterations to build the sequence of models
 		- AdaBoost is more abt "voting weights" (?)
 		- Gradient is more abt "adding gradient optimization" (?)
+
+Summary
+	: bagging 
+		- cut training data into subsets (one subset per learner)
+		- train weak learners in parallel (each their own subset)
+	: boosting
+		- entire training data per learner
+		- weak learners are trained in sequence, subsequent learner takes weights from previous learner's mistakes
+	: stacking
+		- 2 subsets of training data (one for learners, one for meta learner)
+			: learners are trained in parallel (training)
+			: meta learner is trained on the outputs of the learners (trained)
+	------------------------
+	new types
+		: random forest - bagging algo on decision trees
+			- 
+		: gradient boosting - boosting algo on decision trees
+		: XGBoost - extreme gradient boosting
+		: AdaBoost - adaptive boosting
