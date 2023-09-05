@@ -262,3 +262,108 @@ Model Evaluation in Classification
 			| randomly sample data with replacement
 			| train model on sampled data
 			| evaluate model on unsampled data
+
+------------------------------------------------
+Ensemble Learning
+- weak learner/classifier - learning algo that performs slighly better than chance (e.g. correctly labels ~.6)
+
+(Accuracy v Efficiency -------------------------)
+| accuracy - true predictions/total predictions |
+| efficiency - complexity, time, space			|
+(-----------------------------------------------)
+
+- Why use Ensemble Learning?
+	: can combine weak learners to create a strong learner
+	: basic ensemble functions
+		- max voting (classification - discrete)
+			| class with the most votes is the predicted class
+		- averaging (regression - continuous)
+			| average of all predictions is the predicted value
+		- weighted averaging (regression)
+			| each learner is given a certain weight and thus higher weight have more influence on the final prediction
+
+- What is bagging? (bootstrap aggregating)
+	: multiple weak learners are trained in parallel (each learner is independent of each other)
+	: each weak learner has input data randomly sampled from the original dataset with replacement
+	: final prediction is the average of all weak learners
+	: reduces variance (how much the model changes based on input data)
+	: reduces overfitting (model fits training data too well)
+
+- What is boosting?
+	: multiple weak learners are trained in sequence (each learner is dependent on each other)
+		- think of it as a chain of weak learners where each sequential learner has more information than the previous learner (weights of mistakes from prior learner)
+	: each subsequent model is trained by giving more weight to examples that were misclassified by previous models
+		- e.g. if model 1 misclassified 10 examples, then model 2 will give more weight to those 10 examples
+	: final prediction is chosen by scaling each weak-learner's prediction by its weight (why give weight to wrong answers?)
+	: reduces bias (error between avg model prediction/truth - how good the model is at predicting the data)
+
+- What is stacking?
+	: multiple weak learners (different types) are trained in parallel (each learner is independent of each other)
+	: does not use simple voting for final prediction
+	: creates a meta learner trained on the outputs of the weak learners
+	: 2 subsets of the training data
+		- one for training the weak learners
+		- one for training the meta learner (weak learners are fed the data then the output is fed to meta learner)
+
+Summary of Ensemble Methods (you can combine based on the problem)
+	: bagging - reduces variance, simple voting
+	: boosting - reduces bias, weighted voting
+	: stacking - improves accuracy, learned voting	
+
+Decision Tree Ensemble Methods
+	: issues with decision trees - (over/under fitting)
+	Random Forest
+		- bagging algo on decision trees
+			1. pick N random records from data set (bootstrap)
+			2. build a decision tree based on the N records
+			3. repeat steps 1-2 k times to make k trees
+			4. each tree predicts the class label of the prediction, majority class wins
+	Pros
+		: used for classification & regression
+		: works well w categorical/numerical data, no scaling or transformation required
+		: generally provides high accuracy and balance the bias-variance trade off
+	Cons
+		: not easily interpretable
+		: computationally intense
+		: like "black box" algo, little control over what model does
+
+	(Bootstrap v Cross Validation (kfold) -------------------------------------)
+	| Bootstrap - sampling with replacement (can have overlap/reused data)	   |
+	| Cross Validation - sampling without replacement (no overlap/reused data) |
+	(--------------------------------------------------------------------------)
+
+	Gradient boosting (how is it different from regular boosting?)
+		- Boosting algo on decision trees
+			: calculates loss function, updates model parameters in direction that reduces loss function the most
+			: final prediction is obtained by adding up the projections of each individual tree
+	Pros
+		: used for classification & regression
+		: helpful for managing complicated heterogenous data and enhancing model correctness
+		: can handle categorical and continuous vars
+		: high prediction accuracy 
+	Cons
+	: computationally expensive
+	: overfitting
+
+	(Heterogeneous v homogeneous Data set --------------------------------------)
+	| Heterogeneous can have different types, e.g. numerical and categorical 	|
+	| Homogeneous can only have one type, e.g. all numerical or all categorical |
+	(---------------------------------------------------------------------------)
+
+	XGBoost (extreme gradient boosting)
+		- Boosting algo on decision trees
+			: custom loss function 
+			: main diff between Gradient and XG - uses regularization technique
+		- performs better than Gradient bc of regularization
+		- utilizes CPU parallel processing
+		- 2 main components
+			: tree boosting - builds trees one at a time, each tree is built to correct the errors of the previous tree
+			: regularization - penalizes more complex models
+
+	AdaBoost (Adaptive Boosting)
+		- Decision Stumps (decision trees with only 1 split)
+		- weak learner needs to minimize weighted error
+		- more intuitive than Gradient but Gradient is more flexible (generic algo)
+		- AdaBoost is slower bc needing multiple iterations to build the sequence of models
+		- AdaBoost is more abt "voting weights" (?)
+		- Gradient is more abt "adding gradient optimization" (?)
