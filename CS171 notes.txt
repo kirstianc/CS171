@@ -387,3 +387,110 @@ Summary
 		: gradient boosting - boosting algo on decision trees
 		: XGBoost - extreme gradient boosting
 		: AdaBoost - adaptive boosting
+------------------------
+Review
+- Supervised Learning - given training data + desired outputs (labels)
+	: regression - y is a real number
+	: classification - y is categorical
+- Ensemble Learning - combining multiple weak learners to create a strong learner
+	: bagging - reduces variance, simple voting
+	: boosting - reduces bias, weighted voting
+	: stacking - improves accuracy, learned voting
+
+------------------------
+Parametric ML algo - summarizes data w set of parameters of a fixed size
+	: 2 steps
+		1. select a form for the function
+		2. learn coefficients for the function from training data
+	: examples - linear regression, logistic regression, linear discriminant analysis, naive bayes, simple neural networks
+	Pros
+		: simple (easy to understand/interpret)
+		: fast (when learning from data)
+		: less training data required
+	Cons
+		: less flexible (constrained to specific form )
+		: limited complexity (more suited to simpler problems)
+		: poor fit (unlikely to match true underlying function [imagine a linear function trying to fit a quadratic function])
+
+Non-parametric ML algo - does not summarize data w set of parameters of a fixed 
+	: good when a lot of data and no prior knowledge
+	: when you don't want to worry abt choosing the right features
+	: seek best fit to training data
+		- constructing the mapping function while maintaining the ability to generalize unseen data
+		- e.g. K-Nearest Neighbors (KNN), decision trees, support vector machines
+	Pros
+		: flexible (not constrained to specific form)
+		: powerful (no assumption abt underlying function)
+		: performance (high perf models for prediction)
+	Cons
+		: slow (when learning from data)
+		: more training data required
+		: overfitting (more likely to overfit training data)
+
+( try drawing the circles with each algo inside each to see how they relate )-----------------
+
+K-Nearest Neighbors (KNN) [non-parametric supervised learning]
+- one of the simplest ML classifier algo
+- Simple Idea: label a new pt the same as closest known pt
+- type of Instance-Based learning (memory based)
+
+How does KNN work?
+	: given set of labeled pts (training data) and a new pt (test data)
+	: find k closest pts in training data and label new pt accordingly
+		- e.g. given 2 classes (red, blue) and k = 3
+			| 2 red pts, 1 blue pt
+			| new pt is red bc 2/3 closest pts are red (if all classes [colors] given equal weight)
+	
+Who gets to vote?
+	: "national" election, majority rules and most numerous class wins
+		- no universal suffrage for k-NN
+	: "local" election used for k-NN, nearest k pts
+
+How to count (weight) the votes?
+	: weight by distance
+		- closer pts have more influence on the prediction
+		- weight is proportional to the inverse of the distance (1/distance(k pt))
+		- sum inverse distances together to get weight of class (e.g. 1/r1 + 1/r2 vs 1/b1)
+		- Distance metrics/formulas
+			| Euclidean Distance - straight line distance
+			| Manhattan Distance - sum of absolute differences
+			| Minkowski Distance - generalized distance metric of both Euclidean and Manhattan
+			| Cosine Distance - angle between vectors
+			| Jaccard Distance - similarity between sets
+	: weight by class frequency (use all pts in the graph)
+		- e.g. 2 red, 1 blue in k = 3
+			| 10 red total, 4 blue total
+	: weight by fixed radius (pts within radius are given weight, pts outside radius are not given weight)
+		- the mode (most common class) is the predicted class
+		- good for sparse data
+	
+How to choose K in KNN?
+	: based on input data
+	: if input has outliers or noise, higher is better
+	: cross-validation (k-fold) to find optimal k
+
+KNN - Pros
+	: no training required
+	: computations deferred to scoring phase
+	: as training size grows, accuracy increases
+	: works for multi-class problems
+		- e.g. given 3 classes (red, blue, green)
+	: easy to implement (low complexity)
+
+KNN - Cons
+	: scoring is not straightforward
+		- calculate all distances to all points needed for score computation
+	: very sensitive to local structure of data
+		- e.g. if data is clustered, then KNN will be biased towards the cluster
+	: does not scale well (time consuming to calculate distances if data set is large)
+	: Curse of Dimensionality
+		- hard time classifying data pts when dimensionality is too high
+		- dimensionality: number of features
+	: prone to overfitting
+
+KNN - Summary
+	: non-parametric supervised learning
+	: simple
+	: lazy learning (no training required)
+	: can be combined w other techniques like PCA 
+	
