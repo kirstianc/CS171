@@ -493,4 +493,63 @@ KNN - Summary
 	: simple
 	: lazy learning (no training required)
 	: can be combined w other techniques like PCA 
-	
+------------------------
+Review:
+supervised learning
+	: regression - output is real number
+	: classificaiton - output is categorical
+
+decision tree
+knn
+------------------------
+Linear Regression (parametric supervised learning)
+- conditions for accurate soln
+	: linearity (relationship between x-independent and y-dependent is linear)
+	: independence (x's are independent of each other)
+	: homoscedasticity (amt of x-independent has no impact on variance of errors)
+	: normality (normally distributed)
+	: no multicollinearity (x's are not correlated w each other)
+- simple linear regression
+	: y = mx + b
+	: dependent var dependent on only 1 independent var
+	: sloped line is called regression line
+- multiple linear regression
+	: dependent var depends on more than 1 independent var
+- R-Squared (R^2)
+	: measures how well the regression line fits the data
+	: R^2 = 1 - (SSres/SStot)
+		| SSres - sum of squared residuals (sum of squared errors)
+			- (yi - yhat)^2; yi - actual value, yhat - predicted value
+		| SStot - total sum of squares (sum of squared differences from mean)
+			- (yi - yavg)^2; yi - actual value, yavg - avg value
+- Residual Sum of squares (Loss function)
+	: goal is to minimize RSS
+	: RSS = sum of (yi - yhat)^2
+	: gradient i.e. partial derivative of loss function
+	: gradient descent - iterative optimization algo to find min of a function
+		- take repeated steps in opposite direction of gradient of function at the current points
+		| types
+			- batch gradient descent (uses entire training set to compute gradient)
+			- mini-batch gradient descent (uses a subset of training set to compute gradient)
+			- stochastic gradient descent (uses 1 training example to compute gradient)
+	: Frontpropagation - forward pass of data through the network
+	: Backpropagation - backward pass of data through the network
+
+Linear Regression - Pros
+	: simple
+	: less complexity
+	: dimensionality reduction, regularization, cross validation avoids overfitting
+
+Linear Regression - Cons
+	: outliers have huge effects
+	: assumes independence between attributes
+	: not a complete description of relationship among vars
+
+	(App Idea (parking @ sjsu) ----------------------------------)
+	| pull parking data and store on graph (similar to cs171)	 |
+	| create avg time for parking per time periods (5mins)		 |
+	| possibly allow user to put preferred time arrival and show |
+	| probability of finding parking spot						 |
+	| additionally, show probable floor?						 |
+	(------------------------------------------------------------)
+
