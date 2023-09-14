@@ -553,3 +553,51 @@ Linear Regression - Cons
 	| additionally, show probable floor?						 |
 	(------------------------------------------------------------)
 
+------------------------
+Review
+Supervised Learning - Y=f(X)
+	: classification - output is categorical
+	: regression - output is continuous
+
+Logistic Regression (parametric supervised learning)
+	: used for classification
+		- examples: email spam or not spam, tumor malignant or benign, online transaction is fraudulent
+	: cannot be used for classification problems unless probability is used
+		- e.g. if given ages and true/false in having disease, cannot use. but if given ages and % of true/false of having disease, it is possible.
+	
+	Binary classification (one or the other)
+	: Sigmoid function
+		| maps any real value to a value between 0 and 1
+		| used to transform linear combinations of predictors into probabilities
+
+
+	Multi-Class classification (3+ classifications)
+	: use softmax function to calculate
+
+	Log Odds
+	: Odds Ratio = p / 1 - p (p = probability of event)
+	: logistic regression assumes log odds is linear function of x
+
+	Logistic Regression - Objective Function (Loss Function - RSS)
+
+	Maximum Likelihood Estimation (MLE)
+	: used to estimate parameters of a probability distribution by maximizing a likelihood function
+
+	Gradient Descent for Logistic Regression
+	: gradient descent is used to minimize the loss function
+
+	Logistic Regression - Pros
+	: easier to implement, interpret, and very efficient to train
+	: no assumptions abt distributino of classes
+	: easy to extend to multi-classes
+	: fast at classifying unknown records
+
+	Logistic Regression - Cons 
+	: prone to overfitting
+	: if # of observations is less than # of features, model will overfit
+	: creates linear boundaries
+	: can only be used to predict discrete functions
+
+------------------------
+
+
