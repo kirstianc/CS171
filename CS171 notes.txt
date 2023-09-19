@@ -600,4 +600,96 @@ Logistic Regression (parametric supervised learning)
 
 ------------------------
 
+Data Preprocessing
+Why Preprocess?
+: real world data is dirty
+	- incomplete, noisy (errors/outliers), inconsistent (discrepancy in codes/names), duplicate, irrelevant, redundant
 
+Data Cleaning
+: fill in missing values, smooth data, identify/remove outliers, resolve inconsistencies
+: tasks
+	- fill in missing values
+		| many tuples have no recorded value for several attributes, e.g. age, income, etc
+		| equipment malfunction
+		| data entered incorrectly/not important at time of entry
+		: ignore missing data
+		: fill manually
+		: use global constant (e.g. 'Unknown' class)
+		: use attribute mean 
+		: use most probably value
+	- identify outliers
+	- smooth noisy data
+		| faulty instruments, data entry problems, etc
+		: Binning method
+			- sort data and partition into bins
+			- smooth by bin means, median, or boundaries
+			: equal-width partitioning
+				- range of values divided into N intervals of equal size
+				- width = (max - min) / N
+			: equal-depth partitioning
+				- range of values divided into N intervals with equal number of values in each bin
+				- depth = (total # of values) / N
+		: Clustering method
+			- smooth by cluster means, median, or boundaries
+	- correct inconsistencies
+
+Data Integration
+: integrate multiple databases, data cubes, files, etc
+: may have rendundant info, e.g. age in customer table and age in loan table
+
+Data Transformation
+: normalization - scaling to specific range
+	- min-max normalization
+		| scale values to range [new_min, new_max]
+		| new_value = (old_value - min)/(max - min) * (new_max - new_min) + new_min
+	- z-score normalization
+		| scale values to have mean = 0 and std dev = 1
+		| new_value = (old_value - mean)/std_dev
+	- decimal scaling
+		| scale values to range [0, 1]
+		| new_value = old_value/10^j
+		| j = spaces of max value to left of decimal point (e.g. 1000 -> 4 to get .1000) or (e.g. 485 -> 3 to get 0.485)
+: aggregation - summary or aggregation operations on data (sum, min, max, average, etc)
+: smoothing - remove noise from data (e.g. binning, clustering)
+: generalization - transform low lvl data to high lvl attributes w hierarchy
+: attribute/feature construction - new attributes constructed from given ones (e.g. age to age group)
+
+Data Reduction
+: reduce volume but produce similar results (if large dataset, long time to train)
+: Dimensionality reduction
+	- remove irrelevant, redundant, or noisy attributes
+	- select min set of attributes whose probability distribution is as close as possible to original probability distribution
+	- Forward Selection - start w empty set, add 1 attribute at a time (attribute w best accuracy/most relevant)
+	- Backward Elimination - start w all attributes, remove 1 attribute at a time (attribute w worst accuracy/least relevant)
+	- Principal Component Analysis (PCA)
+		| large set -> smaller set by selecting subset of attributes that capture most of info
+		| 1st principal component - direction of max variance, 2nd pc - direction of 2nd max variance, etc
+: Discretization/Quantization
+	- 3 types of attributes: 1. nominal (no order), 2. ordinal (order), 3. continuous (real numbers)
+	Discretization/Quantization
+	- divide range of continuous into intervals
+	- replace attribute values w interval labels
+		| e.g. age -> young, middle-aged, senior
+: Sampling
+: Data compression
+: Data Cube aggregation
+
+Imbalanced Data
+: large discrepancy between # of examples w each class label
+| e.g. 99% of data is class A, 1% of data is class B
+| e.g. medical diagnosis (majority are healthy thus always predict healthy), rare events like earthquakes, fraud detection, etc
+: evaluation
+	- accuracy is not a good measure
+: Undersampling
+	- randomly remove examples from majority class until balanced
+	| e.g. 99% A, 1% B -> 50% A, 50% B
+	Pros: easy to implement, training more efficient
+	Cons: throwing away a lot of data/information
+: Oversampling
+	- randomly duplicate examples from minority class until balanced
+	| e.g. 99% A, 1% B -> 50% A, 50% B
+	Pros: easy to implement, utilize all training data, no data lost
+	Cons: computationally expensive to train classifier, overfitting
+: Weighted examples
+	- assign higher weights to minority class examples, majority % / minority % = minority weight
+	| e.g. 99% A, 1% B -> 99/1 = 99 -> A weight = 1, B weight = 99
