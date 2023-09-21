@@ -1,0 +1,17 @@
+Implementation details:
+
+    Using your completed implementations, train and test the Logistic Regression classifier(s) on the input files provided with this assignment named ‘train.csv’ 
+
+Download ‘train.csv’ and ‘test.csv’. These files contain the extracted features from hundreds of emails.
+Your training should use Stochastic Gradient Descent for optimization.
+
+The data labels are ham:0, spam: 1. Spam is considered as the positive class and ham is considered as the negative class.
+
+Set the learning rate and the number of training iterations to 0.01 and 200. While it is common to initialize the weight vector randomly, in this homework we require you to set it to the 0 vector. During prediction, it is common to resolve the boundary cases (probability of class 1 = probability of class 0 = 0.5) both randomly or deterministically. In this homework, we want you to use the following prediction rule: PREDICTED CLASS = 1 iff Probability of class 1 ≥ 0.5 (notice that the rule says ≥ and not >).
+
+To help you, the skeleton of the code named LogisticRegression.java. Download LogisticRegression.java is provided. The files contain incomplete code and comments to help you write the required functions. You would need to complete the code and add other methods if required.
+
+What to submit:
+
+    [70 points] Submit your completed code as a .zip file. The zip file should contain all your implementation files. Note that it is your responsibility to make sure that your code runs successfully and you provide clear instructions for doing so. You will not get points if we cannot run your code. Also, for full credit, your code should be well-documented with comments.
+    [30 points] Also submit a Report (a pdf file) answering the questions asked in this homework. Even though your code should output answers to most of the questions, we want you to include them in your report. When reporting performance figures, round them off to 2 places after decimal. For questions that ask for a reason, there are more points for the explanation, than for the observation.
