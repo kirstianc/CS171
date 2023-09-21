@@ -27,19 +27,31 @@ public class LogisticRegression {
         /* Helper function for prediction **/
         /** Takes a test instance as input and outputs the probability of the label being 1 **/
         /** This function should call sigmoid() **/
-        
+        private double probability(double[] x) {
+            double logit = 0.0;
+            for (int i = 0; i < weights.length; i++)  {
+                logit += weights[i] * x[i];
+            }
+            return sigmoid(logit);
+        }        
 
 
         /* The prediction function **/
         /** Takes a test instance as input and outputs the predicted label **/
         /** This function should call Helper function **/
-        
+        public int predict(double[] x) {
+            double prob = probability(x);
+            if (prob > 0.5) return 1;
+            else return 0;
+        }
 
 
         /** This function takes a test set as input, call the predict function to predict a label for it, **/
         /** and prints the accuracy, P, R, and F1 score of the positive class and negative class and the confusion matrix **/
-        
+        public int accuracy(double[] x) {
 
+            
+        }
 
 
         /** Train the Logistic Regression in a function using Stochastic Gradient Descent **/
