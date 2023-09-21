@@ -693,3 +693,47 @@ Imbalanced Data
 : Weighted examples
 	- assign higher weights to minority class examples, majority % / minority % = minority weight
 	| e.g. 99% A, 1% B -> 99/1 = 99 -> A weight = 1, B weight = 99
+
+------------------------
+Regularization
+
+Review
+: Linear Regression - sum of weighted independent vars (e.g. y = w1x1 + w2x2 + b)
+	- cost function - RSS + regularization term
+	- gradient descent - minimize loss function
+: Logistic Regression - sigmoid function (e.g. y = 1/(1 + e^-(w1x1 + w2x2 + b)))
+	- cost function - negative log likelihood + regularization term
+	- gradient descent - minimize loss function
+: Underfitting - not enough features (i.e. not enough weights) thus model is too simple
+	- fails to capture underlying trend of data
+	- high bias
+: Overfitting - too many features (i.e. too many weights) thus model fits training data too well
+	- fails new examples/test cases
+	- high variance
+: Bias-Variance Tradeoff 
+	- bias - difference between prediction/truth (how well the model is working)
+	- variance - how spread the prediction is from the mean data (how much the model changes based on the input data)
+
+Addressing Overfitting
+1. getting more training data
+2. reduce # of features
+3. regularization, reduce magnitude/importance of features
+
+Regularization
+: modify loss function
+: add regularization term that penalizes some specific properties of model parameters
+: when lambda is very large = underfitting
+: when lambda is very small = overfitting
+	L1 Regularization - LASSO
+	: penalizes the absolute value of the parameter magnitude
+	L2 Regularization - Ridge Regression
+	: penalizes the square of the parameter magnitude
+
+Pros 
+: reduces overfitting
+: if large multivariante data, works well
+
+Cons
+: includes all predictors, even if not relevant
+: shrink coefficient towards 0
+: trades variance for bias
