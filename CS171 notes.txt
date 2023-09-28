@@ -807,4 +807,24 @@ Kernel Trick
 - inner product of two vectors
 : kernel function - quantifies similarities between two observations
 : Linear Kernel - summation of inner products of each feature
-: Polynomial Kernel - 
+: Polynomial Kernel - inner product of each feature raised to a power
+: Radial Kernel - exponential of a negative gamma value multiplied by inner product of each feature
+	-> has very local behavior
+
+Advantages
+- computationally efficient
+
+SVM with 2+ classes
+- 2 popular approaches to extend SVM to k-classes
+	: one versus one
+	: one versus all
+
+Bayes' Rule 
+- conditional probability
+- P(A|B) = P(B|A) * P(A) / P(B)
+
+Independence Formulation
+- P(A|B) = P(A) * P(B|A) / P(B)
+
+Conditional Independence Formulation
+- P(A|B) = P(A) * P(B|A) / P(B|C) * P(C|A) + P(B|~C) * P(~C|A)
