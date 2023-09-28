@@ -801,4 +801,10 @@ Radial Basis Function Kernel (RBF)
 The Kernel Trick
 - reduces computation by avoiding transforming data into higher dimensions
 -> calculates "as if" the data is in higher dimension
-
+------------------------
+Kernel Trick 
+- reduces computation by avoiding transforming data into higher dimensions
+- inner product of two vectors
+: kernel function - quantifies similarities between two observations
+: Linear Kernel - summation of inner products of each feature
+: Polynomial Kernel - 
