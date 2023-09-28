@@ -737,3 +737,68 @@ Cons
 : includes all predictors, even if not relevant
 : shrink coefficient towards 0
 : trades variance for bias
+------------------------
+Support Vector Machines (SVM)
+: Linear classifier
+: Classifier margin - distance between classifier and nearest datapoint (before hitting datapoint)
+	Maximum Margin (SVM/LSVM)
+	- to find optimal classifier, maximize margin (enlargen margin around line before hitting datapoint)
+	- Support Vectors - points that define the margin (the ones on the edge of the line's margin)
+	- Hyperplane - line that separates the classes (if p-dimensions, Hyperplane is flat affine subspace of dimension p-1)
+		| affine - doesn't intersect the origin
+		| e.g. 2d -> line through graph, 3d -> plane (paper thin) through 3d graph
+		- Hyperplane equation - w1x1 + w2x2 + ... + wnxn + b = 0
+			| w1, w2, ..., wn - weights
+			| x1, x2, ..., xn - features
+			| b - bias
+			: given point X
+				point on hyper plane if p-dimensional space equation = 0
+				point above hyper plane if p-dimensional space equation > 0
+				point below hyper plane if p-dimensional space equation < 0
+		- to find optimal hyperplane:
+			: compute perpendicular distance from each training observation to a given hyperplane
+			-> smallest distance is minimal distance from observation to the hyperplane and is known as the margin
+	? - so would the typical margin just be 0 or close to 0
+	? - would maximum margin contain any datapoints or no, bc then minimal distance to hyperplane is basically 0 / worthless
+	( think of this as inflating a suit around the line and the support vectors are like pegs to hold it from expanding too much )
+
+	Non-separable case
+	- many cases, it is unable to have separating hyperplane (i.e. no maximal margin classifier)
+	-> Soft-Margin - allow some points to be on the wrong side of the margin (i.e. allow some misclassifications)
+
+	Support Vector Classifier (Soft-Margin)
+	- allow some points to be on the wrong side of the hyperplane
+		: slack variables - tells us where the point is in relation to the margin
+			| if slack variable = 0, point is on the correct side of the MARGIN
+			| if slack variable > 0, point is on the wrong side of the MARGIN
+			| if slack variable > 1, point is on the wrong side of the HYPERPLANE
+		: C - penalty parameter (how much to penalize misclassifications)
+		-> large C = high tolerance for wrong classifications, large margin (low variance, high bias)
+		-> small C = low tolerance for wrong classifications, small margin (high variance, low bias)
+	
+	Some cases cannot use Linear boundaries -> quadratic, cubic, other polynomials, etc
+
+------------------------
+StatQuest w Josh Starmer (SVM p1)
+SVM main idea - 
+1. start in low dimension
+2. move data into higher dimension (e.g. 1d -> 2d (square it), 1d -> 3d (cube it))
+3. find SVC (support vector classifier) that separates the higher dimensional data into 2 groups
+-> SVC = hyperplane in higher dimension
+
+2 - how to know how to modify data (e.g. squaring it for 1d -> 2d, etc)
+-> Kernel Functions - systematically find SVC in higher dimensions
+	- relationships between each pt used to find SVC
+
+Polynomial Kernel (d = degree of the polynomial)
+- d=1; compute relationship between each pair of point in 1d
+- d=2; compute relationship between each pair of point in 2d (squared)
+- find good d value by using cross validation
+
+Radial Basis Function Kernel (RBF)
+- functions similar to K nearest neighbors
+
+The Kernel Trick
+- reduces computation by avoiding transforming data into higher dimensions
+-> calculates "as if" the data is in higher dimension
+

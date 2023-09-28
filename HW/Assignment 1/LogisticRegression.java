@@ -41,7 +41,7 @@ public class LogisticRegression {
         /** This function should call Helper function **/
         public int predict(double[] x) {
             double prob = probability(x);
-            if (prob > 0.5) return 1;
+            if (prob >= 0.5) return 1;
             else return 0;
         }
 
@@ -49,8 +49,15 @@ public class LogisticRegression {
         /** This function takes a test set as input, call the predict function to predict a label for it, **/
         /** and prints the accuracy, P, R, and F1 score of the positive class and negative class and the confusion matrix **/
         public int accuracy(double[] x) {
-
+            predict(x);
             
+            // print the accuracy, precision, recall and F1-score for both classes
+            System.out.println();
+
+            // print the confusion matrix
+            System.out.println();
+
+            return 0;
         }
 
 
