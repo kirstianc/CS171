@@ -45,17 +45,52 @@ public class LogisticRegression {
             else return 0;
         }
 
-
         /** This function takes a test set as input, call the predict function to predict a label for it, **/
         /** and prints the accuracy, P, R, and F1 score of the positive class and negative class and the confusion matrix **/
         public int accuracy(double[] x) {
-            predict(x);
             
-            // print the accuracy, precision, recall and F1-score for both classes
-            System.out.println();
+            // initialize vars
+            int predictedLabel = predict(x);
+            int actualLabel = (int) x[0];
+            int truePositive = 0;
+            int trueNegative = 0;
+            int falsePositive = 0;
+            int falseNegative = 0;
 
-            // print the confusion matrix
-            System.out.println();
+            // sum up
+            if (actualLabel == 1 && predictedLabel == 1) {
+                truePositive++;
+            } else if (actualLabel == 0 && predictedLabel == 1) {
+                falsePositive++;
+            } else if (actualLabel == 0 && predictedLabel == 0) {
+                trueNegative++;
+            } else if (actualLabel == 1 && predictedLabel == 0) {
+                falseNegative++;
+            }
+
+            // calculate accuracy
+            double accuracy = (truePositive + trueNegative) / (truePositive + trueNegative + falsePositive + falseNegative);
+
+            // calculate precision
+            double precisionPos = truePositive / (truePositive + falsePositive);
+            double precisionNeg = trueNegative / (trueNegative + falseNegative);
+
+            // calculate recall
+            double recallPos = truePositive / (truePositive + falseNegative);
+            double recallNeg = trueNegative / (trueNegative + falsePositive);
+
+            // calculate f1
+            double f1Pos = 2 * ((precisionPos * recallPos) / (precisionPos + recallPos));
+            double f1Neg = 2 * ((precisionNeg * recallNeg) / (precisionNeg + recallNeg));
+
+            // print results
+            System.out.println("Accuracy: " + accuracy);
+            System.out.println("Precision (Positive): " + precisionPos);
+            System.out.println("Precision (Negative): " + precisionNeg);
+            System.out.println("Recall (Positive): " + recallPos);
+            System.out.println("Recall (Negative): " + recallNeg);
+            System.out.println("F1 (Positive): " + f1Pos);
+            System.out.println("F1 (Negative): " + f1Neg);
 
             return 0;
         }
