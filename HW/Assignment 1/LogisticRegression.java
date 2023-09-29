@@ -126,31 +126,48 @@ public class LogisticRegression {
         }
 
         /** Function to read the input dataset **/
-        public void readDataSet(String file) throws FileNotFoundException {
-            Scanner scanner = new Scanner(new File(file));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] columns = line.split(",");
-                double[] data = new double[columns.length];
-                for (int i = 0; i < columns.length; i++) {
-                    data[i] = Double.parseDouble(columns[i]);
+        public double[] readDataSet(String file) throws FileNotFoundException {
+            try {
+                Scanner scanner = new Scanner(new File(file));
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] columns = line.split(",");
+                    double[] data = new double[columns.length];
+                    for (int i = 0; i < columns.length; i++) {
+                            data[i] = Double.parseDouble(columns[i]);
+                        }
+                    return data;
                 }
-                int label = (int) data[0];
-                double[] x = new double[data.length];
-                x[0] = 1;
-                for (int i = 1; i < data.length; i++) {
-                    x[i] = data[i];
-                }
-                train(x, label);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+            return null;
         }
 
+        private static void print(String string) {
+            System.out.println(string);
+        }
 
         /** main Function **/
         public static void main(String[] args) {
+            print("Logistic Regression using Stochastic Gradient Descent\n");
             LogisticRegression logistic = new LogisticRegression();
-            double[] x = {1, 2, 3};
-            logistic.accuracy(x);
+            
+            // train using train-1.csv 
+            try {
+                print("Training...");
+                logistic.readDataSet("train-1.csv");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            // test using test-1.csv
+            try {
+                print("Testing...");
+                logistic.accuracy(logistic.readDataSet("test-1.csv"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
