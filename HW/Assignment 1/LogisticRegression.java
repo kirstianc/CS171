@@ -112,14 +112,45 @@ public class LogisticRegression {
 
         /** Train the Logistic Regression in a function using Stochastic Gradient Descent **/
         /** Also compute the log-oss in this function **/
-        
-
+        public void train(double[] x, int y) {
+            double[] gradient = new double[weights.length];
+            for (int i = 0; i < ITERATIONS; i++) {
+                double prob = probability(x);
+                for (int j = 0; j < weights.length; j++) {
+                    gradient[j] = (y - prob) * x[j];
+                }
+                for (int j = 0; j < weights.length; j++) {
+                    weights[j] += rate * gradient[j];
+                }
+            }
+        }
 
         /** Function to read the input dataset **/
-        
+        public void readDataSet(String file) throws FileNotFoundException {
+            Scanner scanner = new Scanner(new File(file));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] columns = line.split(",");
+                double[] data = new double[columns.length];
+                for (int i = 0; i < columns.length; i++) {
+                    data[i] = Double.parseDouble(columns[i]);
+                }
+                int label = (int) data[0];
+                double[] x = new double[data.length];
+                x[0] = 1;
+                for (int i = 1; i < data.length; i++) {
+                    x[i] = data[i];
+                }
+                train(x, label);
+            }
+        }
 
 
         /** main Function **/
-        
+        public static void main(String[] args) {
+            LogisticRegression logistic = new LogisticRegression();
+            double[] x = {1, 2, 3};
+            logistic.accuracy(x);
+        }
     }
 
