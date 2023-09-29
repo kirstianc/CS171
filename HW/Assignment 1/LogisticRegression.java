@@ -21,6 +21,7 @@ public class LogisticRegression {
 
         /* Implement the sigmoid function **/
         private double sigmoid(double z) {
+            print("Sigimoiding it up...");
             return 1.0 / (1.0 + Math.exp(-z));
         }
 
@@ -28,6 +29,7 @@ public class LogisticRegression {
         /** Takes a test instance as input and outputs the probability of the label being 1 **/
         /** This function should call sigmoid() **/
         private double probability(double[] x) {
+            print("Calculating the probability of knowing what to do...");
             double logit = 0.0;
             for (int i = 0; i < weights.length; i++)  {
                 logit += weights[i] * x[i];
@@ -40,6 +42,7 @@ public class LogisticRegression {
         /** Takes a test instance as input and outputs the predicted label **/
         /** This function should call Helper function **/
         public int predict(double[] x) {
+            print("Predicting up a storm...");
             double prob = probability(x);
             if (prob >= 0.5) return 1;
             else return 0;
@@ -48,7 +51,8 @@ public class LogisticRegression {
         /** This function takes a test set as input, call the predict function to predict a label for it, **/
         /** and prints the accuracy, P, R, and F1 score of the positive class and negative class and the confusion matrix **/
         public int accuracy(double[] x) {
-            
+            print("Calculating accuracy...");
+
             // initialize vars
             int predictedLabel = predict(x);
             int actualLabel = (int) x[0];
@@ -91,20 +95,20 @@ public class LogisticRegression {
             confusionMatrix[1][1] = trueNegative;
 
             // print results
-            System.out.println("Accuracy: " + accuracy);
+            print("Accuracy: " + accuracy);
             
-            System.out.println("Precision (Positive): " + precisionPos);
-            System.out.println("Precision (Negative): " + precisionNeg);
+            print("Precision (Positive): " + precisionPos);
+            print("Precision (Negative): " + precisionNeg);
             
-            System.out.println("Recall (Positive): " + recallPos);
-            System.out.println("Recall (Negative): " + recallNeg);
+            print("Recall (Positive): " + recallPos);
+            print("Recall (Negative): " + recallNeg);
             
-            System.out.println("F1 (Positive): " + f1Pos);
-            System.out.println("F1 (Negative): " + f1Neg);
+            print("F1 (Positive): " + f1Pos);
+            print("F1 (Negative): " + f1Neg);
 
-            System.out.println("Confusion Matrix: ");
-            System.out.println("[" + confusionMatrix[0][0] + " " + confusionMatrix[0][1] + "]");
-            System.out.println("[" + confusionMatrix[1][0] + " " + confusionMatrix[1][1] + "]");
+            print("Confusion Matrix: ");
+            print("[" + confusionMatrix[0][0] + " " + confusionMatrix[0][1] + "]");
+            print("[" + confusionMatrix[1][0] + " " + confusionMatrix[1][1] + "]");
 
             return 0;
         }
@@ -113,6 +117,7 @@ public class LogisticRegression {
         /** Train the Logistic Regression in a function using Stochastic Gradient Descent **/
         /** Also compute the log-oss in this function **/
         public void train(double[] x, int y) {
+            print("Training the next Chosen One...");
             double[] gradient = new double[weights.length];
             for (int i = 0; i < ITERATIONS; i++) {
                 double prob = probability(x);
@@ -127,6 +132,7 @@ public class LogisticRegression {
 
         /** Function to read the input dataset **/
         public double[] readDataSet(String file) throws FileNotFoundException {
+            print("Reading the data set to my son...");
             try {
                 Scanner scanner = new Scanner(new File(file));
                 while (scanner.hasNextLine()) {
