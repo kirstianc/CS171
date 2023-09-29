@@ -83,14 +83,28 @@ public class LogisticRegression {
             double f1Pos = 2 * ((precisionPos * recallPos) / (precisionPos + recallPos));
             double f1Neg = 2 * ((precisionNeg * recallNeg) / (precisionNeg + recallNeg));
 
+            // calculate confusion matrix
+            int[][] confusionMatrix = new int[2][2];
+            confusionMatrix[0][0] = truePositive;
+            confusionMatrix[0][1] = falsePositive;
+            confusionMatrix[1][0] = falseNegative;
+            confusionMatrix[1][1] = trueNegative;
+
             // print results
             System.out.println("Accuracy: " + accuracy);
+            
             System.out.println("Precision (Positive): " + precisionPos);
             System.out.println("Precision (Negative): " + precisionNeg);
+            
             System.out.println("Recall (Positive): " + recallPos);
             System.out.println("Recall (Negative): " + recallNeg);
+            
             System.out.println("F1 (Positive): " + f1Pos);
             System.out.println("F1 (Negative): " + f1Neg);
+
+            System.out.println("Confusion Matrix: ");
+            System.out.println("[" + confusionMatrix[0][0] + " " + confusionMatrix[0][1] + "]");
+            System.out.println("[" + confusionMatrix[1][0] + " " + confusionMatrix[1][1] + "]");
 
             return 0;
         }
