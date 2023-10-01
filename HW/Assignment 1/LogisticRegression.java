@@ -1,65 +1,72 @@
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LogisticRegression {
 
-        /** the learning rate */
-        private double rate=0.01;
+    /** the learning rate */
+    private double rate = 0.01;
 
-        /** the weights to learn */
-        private double[] weights;
+    /** the weights to learn */
+    private double[] weights;
 
-        /** the number of iterations */
-        private int ITERATIONS = 200;
+    /** the number of iterations */
+    private int ITERATIONS = 200;
 
-        /* Constructor initializes the weight vector. Initialize it by setting it to the 0 vector. **/
-        public LogisticRegression() {
-            weights = new double[3];
-        }        
+    private int truePositive = 0;
+    private int trueNegative = 0;
+    private int falsePositive = 0;
+    private int falseNegative = 0;
 
-        /* Implement the sigmoid function **/
-        private double sigmoid(double z) {
-            print("Sigimoiding it up...");
-            return 1.0 / (1.0 + Math.exp(-z));
+    /* Constructor initializes the weight vector. Initialize it by setting it to the 0 vector. **/
+    public LogisticRegression() {
+        weights = new double[0];
+    }
+
+    /* Implement the sigmoid function **/
+    private double sigmoid(double z) {
+        //print("Sigimoiding it up...");
+        return 1.0 / (1.0 + Math.exp(-z));
+    }
+
+    /* Helper function for prediction **/
+    /** Takes a test instance as input and outputs the probability of the label being 1 **/
+    /** This function should call sigmoid() **/
+    private double probability(double[] x) {
+        //print("Calculating the probability of knowing what to do...");
+        double logit = 0.0;
+        for (int i = 0; i < weights.length; i++) {
+            logit += weights[i] * x[i];
         }
+        return sigmoid(logit);
+    }
 
-        /* Helper function for prediction **/
-        /** Takes a test instance as input and outputs the probability of the label being 1 **/
-        /** This function should call sigmoid() **/
-        private double probability(double[] x) {
-            print("Calculating the probability of knowing what to do...");
-            double logit = 0.0;
-            for (int i = 0; i < weights.length; i++)  {
-                logit += weights[i] * x[i];
-            }
-            return sigmoid(logit);
-        }        
+    /* The prediction function **/
+    /** Takes a test instance as input and outputs the predicted label **/
+    /** This function should call Helper function **/
+    public int predict(double[] x) {
+        //print("Predicting up a storm...");
+        double prob = probability(x);
+        if (prob >= 0.5) return 1;
+        else return 0;
+    }
 
+    /** This function takes a test set as input, call the predict function to predict a label for it, **/
+    /** and prints the accuracy, P, R, and F1 score of the positive class and negative class and the confusion matrix **/
+    public int accuracy(List<double[]> dataset) {
+        //print("Calculating accuracy...");
 
-        /* The prediction function **/
-        /** Takes a test instance as input and outputs the predicted label **/
-        /** This function should call Helper function **/
-        public int predict(double[] x) {
-            print("Predicting up a storm...");
-            double prob = probability(x);
-            if (prob >= 0.5) return 1;
-            else return 0;
-        }
+        // initialize vars
+        truePositive = 0;
+        trueNegative = 0;
+        falsePositive = 0;
+        falseNegative = 0;
 
-        /** This function takes a test set as input, call the predict function to predict a label for it, **/
-        /** and prints the accuracy, P, R, and F1 score of the positive class and negative class and the confusion matrix **/
-        public int accuracy(double[] x) {
-            print("Calculating accuracy...");
-
-            // initialize vars
+        for (double[] x : dataset) {
             int predictedLabel = predict(x);
             int actualLabel = (int) x[0];
-            int truePositive = 0;
-            int trueNegative = 0;
-            int falsePositive = 0;
-            int falseNegative = 0;
 
             // sum up
             if (actualLabel == 1 && predictedLabel == 1) {
@@ -71,109 +78,134 @@ public class LogisticRegression {
             } else if (actualLabel == 1 && predictedLabel == 0) {
                 falseNegative++;
             }
-
-            // calculate accuracy
-            double accuracy = (truePositive + trueNegative) / (truePositive + trueNegative + falsePositive + falseNegative);
-
-            // calculate precision
-            double precisionPos = truePositive / (truePositive + falsePositive);
-            double precisionNeg = trueNegative / (trueNegative + falseNegative);
-
-            // calculate recall
-            double recallPos = truePositive / (truePositive + falseNegative);
-            double recallNeg = trueNegative / (trueNegative + falsePositive);
-
-            // calculate f1
-            double f1Pos = 2 * ((precisionPos * recallPos) / (precisionPos + recallPos));
-            double f1Neg = 2 * ((precisionNeg * recallNeg) / (precisionNeg + recallNeg));
-
-            // calculate confusion matrix
-            int[][] confusionMatrix = new int[2][2];
-            confusionMatrix[0][0] = truePositive;
-            confusionMatrix[0][1] = falsePositive;
-            confusionMatrix[1][0] = falseNegative;
-            confusionMatrix[1][1] = trueNegative;
-
-            // print results
-            print("Accuracy: " + accuracy);
-            
-            print("Precision (Positive): " + precisionPos);
-            print("Precision (Negative): " + precisionNeg);
-            
-            print("Recall (Positive): " + recallPos);
-            print("Recall (Negative): " + recallNeg);
-            
-            print("F1 (Positive): " + f1Pos);
-            print("F1 (Negative): " + f1Neg);
-
-            print("Confusion Matrix: ");
-            print("[" + confusionMatrix[0][0] + " " + confusionMatrix[0][1] + "]");
-            print("[" + confusionMatrix[1][0] + " " + confusionMatrix[1][1] + "]");
-
-            return 0;
         }
 
+        // calculate accuracy
+        double accuracy = (truePositive + trueNegative) / (truePositive + trueNegative + falsePositive + falseNegative);
 
-        /** Train the Logistic Regression in a function using Stochastic Gradient Descent **/
-        /** Also compute the log-oss in this function **/
-        public void train(double[] x, int y) {
-            print("Training the next Chosen One...");
-            double[] gradient = new double[weights.length];
-            for (int i = 0; i < ITERATIONS; i++) {
-                double prob = probability(x);
-                for (int j = 0; j < weights.length; j++) {
-                    gradient[j] = (y - prob) * x[j];
-                }
-                for (int j = 0; j < weights.length; j++) {
-                    weights[j] += rate * gradient[j];
-                }
-            }
-        }
+        // calculate precision
+        double precisionPos = truePositive / (truePositive + falsePositive);
+        double precisionNeg = trueNegative / (trueNegative + falseNegative);
 
-        /** Function to read the input dataset **/
-        public double[] readDataSet(String file) throws FileNotFoundException {
-            print("Reading the data set to my son...");
-            try {
-                Scanner scanner = new Scanner(new File(file));
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    String[] columns = line.split(",");
-                    double[] data = new double[columns.length];
-                    for (int i = 0; i < columns.length; i++) {
-                            data[i] = Double.parseDouble(columns[i]);
-                        }
-                    return data;
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+        // calculate recall
+        double recallPos = truePositive / (truePositive + falseNegative);
+        double recallNeg = trueNegative / (trueNegative + falsePositive);
 
-        private static void print(String string) {
-            System.out.println(string);
-        }
+        // calculate f1
+        double f1Pos = 2 * ((precisionPos * recallPos) / (precisionPos + recallPos));
+        double f1Neg = 2 * ((precisionNeg * recallNeg) / (precisionNeg + recallNeg));
 
-        /** main Function **/
-        public static void main(String[] args) {
-            print("Logistic Regression using Stochastic Gradient Descent\n");
-            LogisticRegression logistic = new LogisticRegression();
-            
-            // train using train-1.csv 
-            try {
-                print("Training...");
-                logistic.readDataSet("train-1.csv");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        // calculate confusion matrix
+        int[][] confusionMatrix = new int[2][2];
+        confusionMatrix[0][0] = truePositive;
+        confusionMatrix[0][1] = falsePositive;
+        confusionMatrix[1][0] = falseNegative;
+        confusionMatrix[1][1] = trueNegative;
 
-            // test using test-1.csv
-            try {
-                print("Testing...");
-                logistic.accuracy(logistic.readDataSet("test-1.csv"));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        // print results
+        print("====================\nAccuracy: " + accuracy);
+
+        print("--------------------\nPrecision (Positive): " + precisionPos);
+        print("Precision (Negative): " + precisionNeg);
+
+        print("--------------------\nRecall (Positive): " + recallPos);
+        print("Recall (Negative): " + recallNeg);
+
+        print("--------------------\nF1 (Positive): " + f1Pos);
+        print("F1 (Negative): " + f1Neg);
+
+        print("--------------------\nConfusion Matrix: ");
+        print("[" + confusionMatrix[0][0] + " " + confusionMatrix[0][1] + "]");
+        print("[" + confusionMatrix[1][0] + " " + confusionMatrix[1][1] + "]");
+        print("====================");
+        return 0;
     }
 
+    /** Train the Logistic Regression in a function using Stochastic Gradient Descent **/
+    /** Also compute the log-oss in this function **/
+    public void train(List<double[]> dataset) {
+        print("Training the next Chosen One...");
+
+        weights = new double[dataset.get(0).length - 1];
+
+        for (int i = 0; i < ITERATIONS; i++) {
+            for (double[] x : dataset) {
+                double prob = probability(x);
+                double y = x[0];
+
+                for (int j = 0; j < weights.length; j++) {
+                    weights[j] += rate * (y - prob) * x[j + 1]; // Adjusted for bias term
+                }
+            }
+        }
+
+        //print("Current weights: " + arrayToString(weights));
+    }
+
+    /** Function to read the input dataset **/
+    public List<double[]> readDataSet(String file) throws FileNotFoundException {
+        print("Reading the data set to my son...");
+
+        List<double[]> dataList = new ArrayList<>();
+
+        try {
+            Scanner scanner = new Scanner(new File(file));
+            scanner.nextLine(); // skip the header row
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] columns = line.split(",");
+                double[] data = new double[columns.length];
+                for (int i = 0; i < columns.length; i++) {
+                    data[i] = Double.parseDouble(columns[i]);
+                }
+                dataList.add(data);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return dataList;
+    }
+
+    private static void print(String string) {
+        System.out.println(string);
+    }
+
+    private String arrayToString(double[] arr) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(arr[i]);
+            if (i < arr.length - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    /** main Function **/
+    public static void main(String[] args) {
+        print("====================\nLogistic Regression using Stochastic Gradient Descent\n");
+        LogisticRegression logistic = new LogisticRegression();
+
+        // train using train-1.csv
+        try {
+            print("====================\nTraining...");
+            logistic.train(logistic.readDataSet("train-1.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        print("Training complete.\n====================");
+
+
+        // test using test-1.csv
+        try {
+            print("====================\nTesting...");
+            logistic.accuracy(logistic.readDataSet("test-1.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        print("Testing complete.\n====================");
+    }
+}
