@@ -828,3 +828,19 @@ Independence Formulation
 
 Conditional Independence Formulation
 - P(A|B) = P(A) * P(B|A) / P(B|C) * P(C|A) + P(B|~C) * P(~C|A)
+
+========================
+Essential Probability Functions
+- Bayes Rule
+- Conditional Probability
+- Joint Probability
+- Marginal Probability
+- Independence
+- Conditional Independence
+- Expectation
+
+Density Estimation 
+- Input Attributes => Density Estimation -> Probability
+
+Naives Bayes summary
+- 
