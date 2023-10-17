@@ -1,0 +1,68 @@
+Text Classification using TF-IDF
+
+Given Data:
+You have three short documents (D1, D2, and D3) and their corresponding content (dont need to remove stop words):
+
+    D1: "The sky is blue."
+    D2: "The ocean is deep."
+    D3: "Blue whales live in the ocean."
+
+======================
+Term Frequency (TF) Calculation:
+Compute the term frequency (TF) for the term "blue" in each document. Remember, the formula for TF is:
+
+​TF(t,d) = # of times term t appears in document d / total # of terms in document d
+----------------------
+D1
+TF("the", D1) = 2/4 = 0.5
+TF("sky", D1) = 1/4 = 0.25
+TF("is", D1) = 1/4 = 0.25
+TF("blue", D1) = 1/4 = 0.25
+----------------------
+D2
+TF("the", D2) = 1/4 = 0.25
+TF("ocean", D2) = 1/4 = 0.25
+TF("is", D2) = 1/4 = 0.25
+TF("deep", D2) = 1/4 = 0.25
+----------------------
+D3
+TF("blue", D3) = 1/5 = 0.2
+TF("whales", D3) = 1/5 = 0.2
+TF("live", D3) = 1/5 = 0.2
+TF("in", D3) = 1/5 = 0.2
+TF("the", D3) = 1/5 = 0.2
+TF("ocean", D3) = 1/5 = 0.2
+======================
+Inverse Document Frequency (IDF) Calculation:
+Compute the inverse document frequency (IDF) for the term "blue". Use the formula:
+
+IDF(t,D) = log(Total # of documents / Number of documents with term t in it)
+----------------------
+Total # of documents = 3
+Number of documents with term "blue" = 2
+IDF("blue") = log(3/2) = 0.176
+======================
+TF-IDF Calculation:
+Compute the TF-IDF score for the term "blue" in each document using the formula:
+
+TFIDF(t,d,D)= TF(t,d) × IDF(t,D)
+----------------------
+IDF("blue") = 0.176
+----------------------
+D1
+TF("blue", D1) = 0.25
+TFIDF("blue", D1) = 0.25 * 0.176 = 0.044
+----------------------
+D2
+TF("blue", D2) = 0
+TFIDF("blue", D2) = 0 * 0.176 = 0
+----------------------
+D3
+TF("blue", D3) = 1/5 = 0.2
+TFIDF("blue", D3) = 0.2 * 0.176 = 0.035
+======================
+Document Classification:
+You are given that higher TF-IDF scores for the term "blue" are more relevant to the category "Nature". Based on the TF-IDF scores you've computed, rank the documents in order of their relevance to the "Nature" category.
+
+Based on the TF-IDF scores, the documents should be ranked as follows:
+D1 > D3 > D2

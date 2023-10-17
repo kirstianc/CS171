@@ -843,4 +843,18 @@ Density Estimation
 - Input Attributes => Density Estimation -> Probability
 
 Naives Bayes summary
-- 
+
+========================
+ML Applications: Text Classification e.g. Spam Email filtering
+
+Dictionary: set of all possible words
+
+Representations
+-> bag of words: treat each document as sequence of words 
+	- document d => vector of word counts (# of each word)
+
+Term Frequency: measure of importance of term t to document d
+-> boolean - 1 if appeared in d, 0 if not
+-> raw count - # of t occuring in d 
+-> log-scaled counts - 1 + log(raw count)
+-> normalized counts - raw count / total # of words in d
