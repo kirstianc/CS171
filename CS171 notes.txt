@@ -858,3 +858,14 @@ Term Frequency: measure of importance of term t to document d
 -> raw count - # of t occuring in d 
 -> log-scaled counts - 1 + log(raw count)
 -> normalized counts - raw count / total # of words in d
+
+========================
+Intro to Neural Networks 
+
+AI contains ML which contains Deep Learning 
+DL c ML c AI 
+
+Early Stopping (combine these 2 rules)
+-> stop when validation loss increases
+-> stop when training loss becomes very small 
+
