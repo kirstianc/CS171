@@ -1,0 +1,20 @@
+- This homework can be done individually or in groups of 2. Collaborating with any one not in your group, or taking help from any online resources for the homework problems is strictly forbidden.
+- Each person/group has to upload their codes and a report (your answers to questions). Each file should clearly mention the names, email addresses and student ids of all group members.
+- You can use Java or Python for this programming assignment.
+
+Support Vector Machines, Random Forest, and K-Nearest Neighbors are powerful machine learning algorithms. We want to use them to classify the IRIS dataset:
+
+https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.htmlLinks to an external site.
+
+This is a real-life problem. You will need first to understand the dataset, and then correctly train a model with it.
+- Use 5-fold cross validation to evaluate your models.
+- Use Accuracy, F1-score and ROC AUC as evaluation metrics.
+
+Submission:
+- You will submit a small report where you describe the dataset (to prove that you understood it), and you analyze the results on the listed machine learning algorithms by comparing their efficiency using Accuracy, F1-score and ROC AUC (use a table to show the comparisons). In your report you may explain how you tuned the hyperparameters of different models.
+- Your code will also need to be submitted.
+
+NOTE:
+To implement them, you can rely on the sklearn libraries such as sklearn.svm.SVC
+
+https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
