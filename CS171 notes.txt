@@ -869,3 +869,48 @@ Early Stopping (combine these 2 rules)
 -> stop when validation loss increases
 -> stop when training loss becomes very small 
 
+========================
+Review: Neural Networks
+- perceptron: single layer neural network (input layer -> hidden layer -> output layer)
+- hidden layer --> dot product of inputs and weights + bias
+- Backpropagation = learning 
+
+Convolutional Neural Networks (CNN)
+- used mainly for image classification
+- multi-layer neural network with 
+	1. local connectivity
+		> local = each neuron is connected to a small subset of neurons in previous layer (as long as it's not all of them)
+		> global = every layer can be connected to every other node in other layer (e.g. fully connected)
+	2. weight sharing
+		> each neuron in a layer shares the same weights (e.g. w1, w2, w3 max)
+		> no weight sharing, each connection has their own weight (e.g. w1-wn)
+	3. input channels
+		> single = inputs from one layer (b/w img = 2d array, x -> y)
+		> multi = inputs from multiple layers (colored img = 3d array, x1 -> y and x2 -> y)
+	4. output maps
+		> single = one output layer (x -> y)
+		> multi = multiple output layers (x -> y1 and x -> y2)
+
+	S1 Convolutional layer -> apply kernel/filters on img to get feature maps
+		?? how do you decide the feature detector/filter ?? --> im assuming you do cross validation to see what detector is the best
+		--> many feature filters applied to one img to get many feature maps (e.g. detect certain features and apply to img to find those features)
+
+	S1.5 Apply Rectifier activation function (ReLU) on feature map 
+		(negative vals are filtered out, positive vals are left alone)
+	
+	S2 Pooling - applies variance over original img (spatial invariance)
+		--> doesn't care abt orientation or where features are, as long as there are features 
+		--> reduces size of img (e.g. 2x2 pooling = 4 pixels -> 1 pixel)
+		--> pick max value in each region (max pooling)
+	
+	S3 Flattening --> flatten img (e.g. matrix 3x3) into 1d array (e.g. 1x9),
+	
+	S4 Full Connection output of S3 = input for ANN (Artificial Neural Network)
+
+	- normalization: subtract mean, divide by standard deviation of activations w/in mini batch 
+	- Dropout: used to reduce overfitting (randomly drop neurons during training)
+
+
+(== game that uses AI learning to create level that player must beat? example: small 10 x 10 room, path player took, AI place block, etc==)
+<== maybe Game where you're making the Death Star path to the core (play on how it was simple so making path complicated and hard) --> can play as either side ==>
+

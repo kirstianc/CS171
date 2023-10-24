@@ -1,0 +1,32 @@
+1 - Given a 3x3 input matrix and a 2x2 kernel, compute the feature map using convolution:
+Input Matrix - 
+| 1 2 3 |
+| 4 5 6 |
+| 7 8 9 |
+
+Kernel - 
+|-1 0 |
+| 0 1 |
+
+Assuming stride 1:
+1 2
+4 5 * kernel -> -1*1 + 0*2 + 0*4 + 1*5 = 4
+
+2 3
+5 6 * kernel -> -1*2 + 0*3 + 0*5 + 1*6 = 4
+
+4 5
+7 8 * kernel -> -1*4 + 0*5 + 0*7 + 1*8 = 4
+
+5 6
+8 9 * kernel -> -1*5 + 0*6 + 0*8 + 1*9 = 4
+
+Feature Map: 
+| 4 4 |
+| 4 4 |
+
+2 - Apply a 2x2 max pooling to the feature map
+
+Given Feature Map from 1: 
+| 4 4 |
+| 4 4 | * max pooling -> | 4 |
