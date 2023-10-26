@@ -910,7 +910,48 @@ Convolutional Neural Networks (CNN)
 	- normalization: subtract mean, divide by standard deviation of activations w/in mini batch 
 	- Dropout: used to reduce overfitting (randomly drop neurons during training)
 
+========================
+Natural Language Processing
+- difficulties:
+	> ambiguity of language
+	> contextual information in sentences
+	> cannot understand creativity
+	> no direct mapping between vocabularies between any languages
+- ML in regards to NLP
+	> ML, programmer must extract features then training of classification nodes is done
+		- easier to explain but lack expressive power
+	> DL, extraction of features and training of classification nodes are together
+		- more expressive but harder to explain (blackbox)
+- word embedding: convert words into vectors to be understood by machines 
+	> One-Hot Encoding - each word is represented by a vector of 0s and 1s
+		e.g. "Milo is a cat", "A cat eats fish", "Milo eats fish" 
+		1 = word is present, 0 = word is not present
+				Milo - (1,0,0,0,0,0)
+				is - (0,1,0,0,0,0)
+				a - (0,0,1,0,0,0)
+				cat - (0,0,0,1,0,0)
+				eats - (0,0,0,0,1,0)
+				fish - (0,0,0,0,0,1)
+			>> Milo is a cat   = (1,1,1,1,0,0)
+			>> A cat eats fish = (0,0,1,1,1,1)
+			>> Milo eats fish  = (1,0,0,0,1,1)
+		CONS
+		- no word similarity, you can mix up the sentence and still return the same value
+		- sparse (lots of 0's)
+		- high dimensionality/size of vectors (e.g. 100,000 words = 100,000 dimensions)
+	> Word2Vec - represent words as dense vectors in a continuous space (captures semantic relationship)
+		- words must be "close" in Euclidean sense (e.g. cloud - sky < cloud - steak = smaller if related, larger if not)
+		- arithmetic should be possible (e.g. King - Man + Woman = Queen)
+		- dense vector = example like 50 vectors between -1.6-1.6 (e.g. 0.1, 0.2, 0.3, etc)
+		- 2 versions
+			> CBOW (Continuous Bag of Words) - predict word given context (surrounding words)
+				- order of surrounding words doesn't matter, faster
+			> Skip-gram - predict context given word
+				- order matters, better job for infrequent words
+		CONS
+		- unable to capture polysemy (multiple meanings of a word)
+		- needs large dataset
+		-> pre-trained models address some Word2Vec limitations
 
 (== game that uses AI learning to create level that player must beat? example: small 10 x 10 room, path player took, AI place block, etc==)
 <== maybe Game where you're making the Death Star path to the core (play on how it was simple so making path complicated and hard) --> can play as either side ==>
-

@@ -7,6 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.model_selection import cross_val_score
 
+# ADD HYPERPARMETERS BEFORE TRAINING (i.e. finding best N for KNN before training)
 def main():
     # Load and prep data
     iris = load_iris()
