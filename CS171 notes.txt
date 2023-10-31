@@ -953,5 +953,27 @@ Natural Language Processing
 		- needs large dataset
 		-> pre-trained models address some Word2Vec limitations
 
+
+Deep Learning NLP ----------------------------
+> Recurrent Neural Network
+    - networks must understand full sentences (sequential data) -> "normal" deep learning cannot do this 
+    > new architecture that introduces concept of state
+        - e.g. "bologne wasn't authentic, but bread was" versus "bread wasn't authentic, but bologne was" (same words, diff meaning)
+        - state allows us to keep track of what we've seen before
+        > have network per each time step (e.g. 1st word, 2nd word, 3rd word, etc.) -> time in this case refers to set of inputs at a given point
+            - each network has a hidden state that is passed to the next network (internal state/cell state - h1)
+
+[Activation Function - function that is applied to the output of each neuron in a neural network]
+
+    - Backpropagation Through Time (BPTT)
+        > can lead to vanishing gradient problem (gradient becomes too small to be useful)
+        
+> Long Short Term Memory (LSTM)
+	> Forget, Store, Update, Output
+		- works better than RNN w long sentences but if too long -> doesn't work -> use Attention 
+			> Attention (2017): each state has access to each other state in the sentence 
+
+> Transformers (Attention is base of this)
+
 (== game that uses AI learning to create level that player must beat? example: small 10 x 10 room, path player took, AI place block, etc==)
 <== maybe Game where you're making the Death Star path to the core (play on how it was simple so making path complicated and hard) --> can play as either side ==>
