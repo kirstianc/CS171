@@ -1,0 +1,90 @@
+Given the following data points with their corresponding labels:
+Data Point 	Coordinates 	Label
+A 	        (2, 3) 	        Cat
+B 	        (5, 3) 	        Dog
+C 	        (3, 6) 	        Cat
+D 	        (4, 8) 	        Dog
+
+Initialize two cluster centroids:
+
+    Centroid X1: (3, 3)
+    Centroid X2: (4, 7)
+
+    Assignment Step: Assign each data point to the nearest centroid using Euclidean distance.
+    Update Step: Calculate the new centroids by taking the mean of the points assigned to each centroid.
+    Entropy Calculation: For each cluster, compute its entropy.
+    Repeat steps 1-3 until the centroids don't change or you've reached a set number of iterations.
+
+-- Initialization --
+Centroid X1: (3, 3)
+Centroid X2: (4, 7)
+
+A to X1 = sqrt((2-3)^2 + (3-3)^2) = 1
+A to X2 = sqrt((2-4)^2 + (3-7)^2) = 4.472
+A is assigned to X1
+
+B to X1 = sqrt((5-3)^2 + (3-3)^2) = 2
+B to X2 = sqrt((5-4)^2 + (3-7)^2) = 4.123
+B is assigned to X1
+
+C to X1 = sqrt((3-3)^2 + (6-3)^2) = 3
+C to X2 = sqrt((3-4)^2 + (6-7)^2) = 1.414
+C is assigned to X2
+
+D to X1 = sqrt((4-3)^2 + (8-3)^2) = 5.099
+D to X2 = sqrt((4-4)^2 + (8-7)^2) = 1
+D is assigned to X2
+
+Entropy of X1 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+Entropy of X2 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+
+-- Iteration 1 --
+X1 = A + B / 2 = (2+5)/2, (3+3)/2 = (3.5, 3)
+Centroid X1: (3.5, 3)
+X2 = C + D / 2 = (3+4)/2, (6+8)/2 = (3.5, 7)
+Centroid X2: (3.5, 7)
+
+A to X1 = sqrt((2-3.5)^2 + (3-3)^2) = 1.5
+A to X2 = sqrt((2-3.5)^2 + (3-7)^2) = 4.272
+A stays assigned to X1
+
+B to X1 = sqrt((5-3.5)^2 + (3-3)^2) = 1.5
+B to X2 = sqrt((5-3.5)^2 + (3-7)^2) = 4.272
+B stays assigned to X1
+
+C to X1 = sqrt((3-3.5)^2 + (6-3)^2) = 3.041
+C to X2 = sqrt((3-3.5)^2 + (6-7)^2) = 1.118
+C stays assigned to X2
+
+D to X1 = sqrt((4-3.5)^2 + (8-3)^2) = 5.024
+D to X2 = sqrt((4-3.5)^2 + (8-7)^2) = 1.118
+D stays assigned to X2
+
+Entropy of X1 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+Entropy of X2 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+
+==== Questions a-c ====
+a) After the first iteration, which points are assigned to Centroid X1 and Centroid X2?
+A and B are assigned to Centroid X1.
+C and D are assigned to Centroi X2.
+
+b) After the first iteration, what are the new coordinates of Centroid X1 and Centroid X2?
+X1 = A + B / 2 = (2+5)/2, (3+3)/2 = (3.5, 3)
+Centroid X1: (2.5, 3)
+X2 = C + D / 2 = (3+4)/2, (6+8)/2 = (3.5, 7)
+Centroid X2: (3.5, 7)
+
+c) Calculate the entropy for each cluster after the first iteration.
+Entropy of X1 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+Entropy of X2 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+==== end Questions a-c ====
+
+X1 = A + B / 2 = (2+5)/2, (3+3)/2 = (3.5, 3)
+Centroid X1: (2.5, 3)
+X2 = C + D / 2 = (3+4)/2, (6+8)/2 = (3.5, 7)
+Centroid X2: (3.5, 7)
+
+A to X1 = sqrt((2-2.5)^2 + (3-3)^2) = 0.5
+==== Question d ====
+d) Continue the iterations until convergence. What are the final centroid coordinates and cluster entropies?
+
