@@ -975,5 +975,81 @@ Deep Learning NLP ----------------------------
 
 > Transformers (Attention is base of this)
 
+========================
+Unsupervised Learning 
+-- Clustering --
+> supervised - provide input and (correct labels) output data, versions of supervised learning being how much answer data is provided
+> unsupervised - provide input data and no output data, no labels, no answers, no teacher
+	- goal is to find patterns in data
+	- e.g. clustering, dimensionality reduction, etc
+> goal of clustering - group similar data points together
+	- clusters are represented by a point (centroid)
+		> centroid = mean of all points in cluster
+	- cluster boundary decided by farthest data point from centroid
+> types of clustering 
+	- exclusive (k means)
+		> idea: randomly initialize k cluster centers, iterate between 2 steps until convergence
+			1. assign each data point to closest cluster center
+			2. update cluster centers to be mean of all data points assigned to it
+		> pros 
+			- simple, fast to compute
+			- converges to local min 
+		> cons
+			- choose k?
+				> visualization method (common), pick manually
+				> elbow method
+			- sensitive to initial centers
+			- sensitive to outliers
+			- detects spherical clusters
+			- assumes mean can be computed
+	- overlapping (fuzzy c means)
+		> idea: each data point has a degree of membership to each cluster
+			- e.g. data point 1 = 0.2 cluster 1, 0.8 cluster 2
+			1. randomly initialize cluster centers
+			2. compute degree of membership for each data point
+			3. update cluster centers to be weighted mean of all data points
+		> pros
+			- allow data points to be in multiple clusters 
+			- more natural representation of behavior of genes 
+		> cons 
+			- need to determine c (k in k-means), # of clusters 
+			- need to determine membership cutoff value
+			- clusters are sensitive to initial assignment of centroids
+	- hierarchical (divisive clustering)
+		> idea: tree-like where clusters are merged or divided depending on the method 
+		> agglomerative (bottom up) clustering
+			> builds from  bottom level, merge similar/nearest pair of clusters, stops when all clusters merged into single root 
+		> divisive (top down) clustering 
+			> builds from top level, divide clusters into smaller clusters, stops when each cluster is a single data point
+		> pros 
+			- dendogram is useful for visualization
+			- provides hierarchical relations between clusters
+			- shown to be able to capture concentric clusters 
+		> cons 
+			- need to determine # of clusters
+			- sensitive to outliers
+	- probabilistic (expectation maximization)
+		> idea: each data point has a probability of belonging to each cluster
+			- e.g. data point 1 = 0.2 cluster 1, 0.8 cluster 2
+			1. randomly initialize cluster centers
+			2. compute probability of each data point belonging to each cluster
+			3. update cluster centers to be weighted mean of all data points
+> clustering functions 
+	- similarity functions/distance measures (e.g. Euclidean, Manhattan, etc)
+	- stopping criteria 
+		> no re-assignment of data point to diff cluster
+		> no change of centroid 
+		> minimum decrease of sum of squared error (SSE)
+	- cluster quality 
+		> inter-cluster distance (distance between clusters)
+		> intra-cluster distance (distance between data points within clusters)
+> cluster evaluation 
+	- difficult bc no ground truth (no specific answer for where the centroids/clustering should be)
+	- user inspection (visualize clusters)
+	- use labeled data (assuming each class is a cluster) 
+		> create confusion matrix and analyze metrics like precision, recall, f1 score, etc.
+		
+
+
 (== game that uses AI learning to create level that player must beat? example: small 10 x 10 room, path player took, AI place block, etc==)
 <== maybe Game where you're making the Death Star path to the core (play on how it was simple so making path complicated and hard) --> can play as either side ==>
