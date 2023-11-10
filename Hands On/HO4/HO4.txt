@@ -79,12 +79,42 @@ Entropy of X1 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
 Entropy of X2 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
 ==== end Questions a-c ====
 
+-- Iteration 2 --
 X1 = A + B / 2 = (2+5)/2, (3+3)/2 = (3.5, 3)
-Centroid X1: (2.5, 3)
+Centroid X1: (3.5, 3)
 X2 = C + D / 2 = (3+4)/2, (6+8)/2 = (3.5, 7)
 Centroid X2: (3.5, 7)
 
-A to X1 = sqrt((2-2.5)^2 + (3-3)^2) = 0.5
+A to X1 = sqrt((2-3.5)^2 + (3-3)^2) = 1.5
+A to X2 = sqrt((2-3.5)^2 + (3-7)^2) = 4.272
+A stays assigned to X1
+
+B to X1 = sqrt((5-3.5)^2 + (3-3)^2) = 1.5
+B to X2 = sqrt((5-3.5)^2 + (3-7)^2) = 4.272
+B stays assigned to X1
+
+C to X1 = sqrt((3-3.5)^2 + (6-3)^2) = 3.041
+C to X2 = sqrt((3-3.5)^2 + (6-7)^2) = 1.118
+C stays assigned to X2
+
+D to X1 = sqrt((4-3.5)^2 + (8-3)^2) = 5.024
+D to X2 = sqrt((4-3.5)^2 + (8-7)^2) = 1.118
+D stays assigned to X2
+
+-- Iteration 3 --
+X1 = A + B / 2 = (2+5)/2, (3+3)/2 = (3.5, 3)
+Centroid X1: (3.5, 3)
+X2 = C + D / 2 = (3+4)/2, (6+8)/2 = (3.5, 7)
+Centroid X2: (3.5, 7)
+
+[Centroid's didn't change, and the points won't change clusters because of that --> done]
+
 ==== Question d ====
 d) Continue the iterations until convergence. What are the final centroid coordinates and cluster entropies?
+The final centroid coordinates are:
+Centroid X1: (3.5, 3)
+Centroid X2: (3.5, 7)
 
+The final cluster entropies are:
+Entropy of X1 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
+Entropy of X2 = -((1/2)log2(1/2) + (1/2)log2(1/2)) = 1
