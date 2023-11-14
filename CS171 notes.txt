@@ -1049,7 +1049,39 @@ Unsupervised Learning
 	- use labeled data (assuming each class is a cluster) 
 		> create confusion matrix and analyze metrics like precision, recall, f1 score, etc.
 		
+========================
+Reinforcement Learning
+- agent interacting w environment which provides numeric reward signals
+- goal is to learn how to take actions to maximize reward
+
+> Markov Decision Process (Environment)
+	> each time step s:
+		> choose Action a from set As
+		> move to new state w probability: Pa(s,s')
+		> receive reward Ra(s,s')
+	- only cares abt current state + current set of actions
+
+> Policy (Behavior of Agent)
+	- pi(s) = action to take in state s 
+
+- Challenges for RL 
+	> many actions/states
+	> if episode can end w/o reward 
+	> narrow path to goal
+
+> Q-Learning
+	> start random state (s)
+	> random action (s -> s')
+		> update Q-table based on reward of current state
+	> repeat random action + update until goal state reached	
+	- Q-Table: table of all possible states and actions w their respective rewards
+	- Q-Learning Challenges
+		> if state space is continuous 
+			- must approximate Q by discretizing (dividing continuous space into finite discrete states)
+		> treats states as identities (no knowledge on how states relate)
+		> converging Q can be difficult bc of random transition/rewards
 
 
+Gym - Toolkit for RL 
 (== game that uses AI learning to create level that player must beat? example: small 10 x 10 room, path player took, AI place block, etc==)
 <== maybe Game where you're making the Death Star path to the core (play on how it was simple so making path complicated and hard) --> can play as either side ==>
